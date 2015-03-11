@@ -2,17 +2,7 @@
 	<head>
 		<title>Users</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
-		<script type="text/javascript">
-			var myApp = angular.module('myApp', []);
-			
-			myApp.controller('MyController', function($scope){
-				$scope.users = [];
-				
-				$scope.addUser = function (user) {
-					$scope.users.push(angular.copy(user));
-				}
-			});
-		</script>
+		<script src="app.js"></script>
 	</head>
 	<body ng-controller="MyController">
 		<h4>{{users.length}} user saved</h4>

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router']);
+var myApp = angular.module('myApp', ['ui.router', 'LocalStorageModule']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise("/");
@@ -17,7 +17,7 @@ myApp.controller('UserController', ['$scope', '$state', 'UserService', function(
 	$scope.users = UserService.users;
 	
 	$scope.addUser = function (user) {
-		UserService.users.push(angular.copy(user));
+		UserService.addUser(angular.copy(user));
 	}
 	
 	$scope.backToHome = function () {
@@ -32,8 +32,13 @@ myApp.controller('HomeController', ['$scope', '$state',function($scope, $state){
 }]);
 
 
-myApp.factory('UserService', function () {
+myApp.factory('UserService', ['localStorageService', function (localStorageService) {
     var userService = {};
-	userService.users = [];
+	var storedUsers = localStorageService.get('users');
+	userService.users = storedUsers ? storedUsers : [];
+	userService.addUser = function(user) {
+		userService.users.push(user);
+		localStorageService.set('users', userService.users);
+	}
 	return userService;
-});
+}]);

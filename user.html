@@ -1,0 +1,13 @@
+<button ng-click="backToHome()">Back to home page</button>
+<h4>{{users.length}} user saved</h4>
+<form>
+	<input ng-model="user.firstname" placeholder="firstName" />
+	<input ng-model="user.lastname" placeholder="lastName" />
+	
+	<button ng-click="addUser(user)">Add a user</button>
+	
+</form>
+
+<ul>
+	<li ng-repeat="user in users">{{user.firstname}} {{user.lastname}}</li>
+</ul>

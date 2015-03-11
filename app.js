@@ -1,15 +1,11 @@
 var myApp = angular.module('myApp', ['ui.router']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-	$urlRouterProvider.otherwise("home");
+	$urlRouterProvider.otherwise("/");
 	$stateProvider.state('home', { 
         url:'/',
         templateUrl: 'home.html',
-		controller:['$scope','$state', function($scope, $state){
-			$scope.goToUsers = function () {
-				$state.go('user');
-			}
-		}]
+		controller: 'HomeController'
     }).state('user', {
 		url:'/user',
         templateUrl: 'user.html',
@@ -26,5 +22,11 @@ myApp.controller('UserController', ['$scope', '$state',function($scope, $state){
 	
 	$scope.backToHome = function () {
 		$state.go('home');
+	}
+}]);
+
+myApp.controller('HomeController', ['$scope', '$state',function($scope, $state){
+	$scope.goToUsers = function () {
+		$state.go('user');
 	}
 }]);

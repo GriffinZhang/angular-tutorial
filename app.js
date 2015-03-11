@@ -13,11 +13,11 @@ myApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $
     });
 }]);
 			
-myApp.controller('UserController', ['$scope', '$state',function($scope, $state){
-	$scope.users = [];
+myApp.controller('UserController', ['$scope', '$state', 'UserService', function($scope, $state, UserService){
+	$scope.users = UserService.users;
 	
 	$scope.addUser = function (user) {
-		$scope.users.push(angular.copy(user));
+		UserService.users.push(angular.copy(user));
 	}
 	
 	$scope.backToHome = function () {
@@ -30,3 +30,10 @@ myApp.controller('HomeController', ['$scope', '$state',function($scope, $state){
 		$state.go('user');
 	}
 }]);
+
+
+myApp.factory('UserService', function () {
+    var userService = {};
+	userService.users = [];
+	return userService;
+});

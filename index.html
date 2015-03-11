@@ -2,18 +2,33 @@
 	<head>
 		<title>Users</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
+		<script src="angular-ui-router.min.js"></script>
 		<script src="app.js"></script>
 	</head>
-	<body ng-controller="MyController">
-		<h4>{{users.length}} user saved</h4>
-		<form>
-			<input ng-model="user.firstname" placeholder="firstName" />
-			<input ng-model="user.lastname" placeholder="lastName" />
-			
-			<button ng-click="addUser(user)">Add a user</button>
-		</form>
-		<ul>
-			<li ng-repeat="user in users">{{user.firstname}} {{user.lastname}}</li>
-		</ul>
+	<body>
+		<div ui-view>
+		</div>	
 	</body>
 </html>
+
+<script type="text/ng-template" id="user.html">
+	<button ng-click="backToHome()">Back to home page</button>
+    <h4>{{users.length}} user saved</h4>
+	<form>
+		<input ng-model="user.firstname" placeholder="firstName" />
+		<input ng-model="user.lastname" placeholder="lastName" />
+		
+		<button ng-click="addUser(user)">Add a user</button>
+		
+	</form>
+	
+	<ul>
+		<li ng-repeat="user in users">{{user.firstname}} {{user.lastname}}</li>
+	</ul>
+
+</script>
+
+<script type="text/ng-template" id="home.html">
+    Welcome !
+	<button ng-click="goToUsers()">Go to users</button>
+</script>
